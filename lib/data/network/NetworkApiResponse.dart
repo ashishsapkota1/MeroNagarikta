@@ -26,7 +26,8 @@ class NetworkApiResponse extends BaseApiServices{
   Future getPostApiResponse(String url, dynamic data) async{
     dynamic responseJson;
     try{
-      final response = await http.post(Uri.parse(url), body: data).timeout(const Duration(seconds: 20));
+      var headers = {'Content-type': 'application/json'};
+      final response = await http.post(Uri.parse(url), headers: headers, body: data).timeout(const Duration(seconds: 120));
       responseJson = returnResponse(response);
     } on SocketException{
       throw NoInternetException('');
