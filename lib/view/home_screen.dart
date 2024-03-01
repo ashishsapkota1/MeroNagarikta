@@ -80,7 +80,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                   const Icon(Icons.upload),
+                    const Icon(Icons.upload),
                     horizontalSpacing(space: 4),
                     const Text('Select Back Image'),
                   ],
@@ -96,7 +96,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => Result(frontImage: _frontImage,backImage: _backImage,)));
+                        builder: (context) => Result(
+                              frontImage: _frontImage,
+                              backImage: _backImage,
+                            )));
               },
               child: const Text(
                 'Fetch',

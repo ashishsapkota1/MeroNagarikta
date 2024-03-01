@@ -19,24 +19,25 @@ class Nagarikta {
   String? nameOfOfficer;
   String? dateofissue;
 
-  Nagarikta(
-      {this.name,
-      this.dateOfBirth,
-      this.permanentAddressDistrict,
-      this.placeOfBirthDistrict,
-      this.citizenshipNumber,
-      this.issuingDistrict,
-      this.gender,
-      this.placeOfBirthWard,
-      this.permanentAddressWard,
-      this.fatherName,
-      this.motherName,
-      this.spouseName,
-      this.permanentAddressNagarpalika,
-      this.placeOfBirthNagarpalika,
-      this.type,
-      this.nameOfOfficer,
-      this.dateofissue,});
+  Nagarikta({
+    this.name,
+    this.dateOfBirth,
+    this.permanentAddressDistrict,
+    this.placeOfBirthDistrict,
+    this.citizenshipNumber,
+    this.issuingDistrict,
+    this.gender,
+    this.placeOfBirthWard,
+    this.permanentAddressWard,
+    this.fatherName,
+    this.motherName,
+    this.spouseName,
+    this.permanentAddressNagarpalika,
+    this.placeOfBirthNagarpalika,
+    this.type,
+    this.nameOfOfficer,
+    this.dateofissue,
+  });
 
   factory Nagarikta.fromMap(Map<String, dynamic> map) {
     return Nagarikta(

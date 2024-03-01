@@ -33,28 +33,30 @@ class _MySavedFilesState extends State<MySavedFiles> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-        itemCount: file.length,
-        itemBuilder: (context, index) {
-          if (file.isEmpty) {
-            return const Center(child: Text('No File Found',
-              style: TextStyle(color: Colors.red, fontSize: 16),));
-          } else {
+    if (file.isEmpty) {
+      return const Center(
+        child: Text(
+          "No File Found",
+          style: TextStyle(color: Colors.red, fontSize: 16),
+        ),
+      );
+    } else {
+      return ListView.builder(
+          itemCount: file.length,
+          itemBuilder: (context, index) {
             return Padding(
-              padding: const EdgeInsets.only(left: 8.0, right: 8,top: 8),
+              padding: const EdgeInsets.only(left: 8.0, right: 8, top: 8),
               child: Card(
                 elevation: 2,
                 child: ListTile(
-                  onTap: (){
+                  onTap: () {
                     OpenFile.open(file[index].path);
                   },
-                  title: Text(file[index].path
-                      .split('/')
-                      .last),
+                  title: Text(file[index].path.split('/').last),
                 ),
               ),
             );
-          }
-        });
+          });
+    }
   }
 }

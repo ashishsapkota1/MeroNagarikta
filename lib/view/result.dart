@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:major_project/res/space.dart';
 import 'package:path_provider/path_provider.dart';
@@ -100,46 +99,45 @@ class _ResultState extends State<Result> {
       var data =
           jsonEncode({'front_image': base64Front, 'back_image': base64Back});
       Nagarikta? response = await repository.uploadApi(data);
-      setState(() {
-        if (kDebugMode) {
-          print(response?.name);
-        }
+      if(response != null) {
+        setState(() {
+          issuingDistrictController.text =
+              returnText(response.issuingDistrict ?? '');
+          citizenshipNumberController.text =
+              returnText(response.citizenshipNumber ?? '');
+          nameController.text = returnText(response.name ?? '');
+          typeController.text = returnText(response.type ?? '');
+          dateOfBirthController.text = returnText(response.dateOfBirth ?? '');
+          dateofissueController.text = returnText(response.dateofissue ?? '');
+          fatherNameController.text = returnText(response.fatherName ?? '');
+          motherNameController.text = returnText(response.motherName ?? '');
+          spouseNameController.text = returnText(response.spouseName ?? '');
+          nameOfOfficerController.text =
+              returnText(response.nameOfOfficer ?? '');
+          permanentAddressDistrictController.text =
+              returnText(response.permanentAddressDistrict ?? '');
+          permanentAddressNagarpalikaController.text =
+              returnText(response.permanentAddressNagarpalika ?? '');
+          permanentAddressWardController.text =
+              returnText(response.permanentAddressWard ?? '');
+          placeOfBirthDistrictController.text =
+              returnText(response.placeOfBirthDistrict ?? '');
+          placeOfBirthNagarpalikaController.text =
+              returnText(response.placeOfBirthNagarpalika ?? '');
+          placeOfBirthWardController.text =
+              returnText(response.placeOfBirthWard ?? '');
+          genderController.text = returnText(response.gender ?? '');
+          _loading = false;
+        });
+      }else{
+        Navigator.pop(context);
+        Utils.flushBarErrorMessage('Error. Try removing card cover and retake in high contrast background', context);
 
-        issuingDistrictController.text =
-            returnText(response?.issuingDistrict ?? '');
-        citizenshipNumberController.text =
-            returnText(response?.citizenshipNumber ?? '');
-        nameController.text = returnText(response?.name ?? '');
-        typeController.text = returnText(response?.type ?? '');
-        dateOfBirthController.text = returnText(response?.dateOfBirth ?? '');
-        dateofissueController.text = returnText(response?.dateofissue ?? '');
-        fatherNameController.text = returnText(response?.fatherName ?? '');
-        motherNameController.text = returnText(response?.motherName ?? '');
-        spouseNameController.text = returnText(response?.spouseName ?? '');
-        nameOfOfficerController.text =
-            returnText(response?.nameOfOfficer ?? '');
-        permanentAddressDistrictController.text =
-            returnText(response?.permanentAddressDistrict ?? '');
-        permanentAddressNagarpalikaController.text =
-            returnText(response?.permanentAddressNagarpalika ?? '');
-        permanentAddressWardController.text =
-            returnText(response?.permanentAddressWard ?? '');
-        placeOfBirthDistrictController.text =
-            returnText(response?.placeOfBirthDistrict ?? '');
-        placeOfBirthNagarpalikaController.text =
-            returnText(response?.placeOfBirthNagarpalika ?? '');
-        placeOfBirthWardController.text =
-            returnText(response?.placeOfBirthWard ?? '');
-        genderController.text = returnText(response?.gender ?? '');
-        _loading = false;
-      });
+      }
     } catch (e) {
       setState(() {
         _loading = false;
       });
-      if (kDebugMode) {
-        print('Error uploading photo and fetching response: $e');
-      }
     }
   }
 
@@ -334,6 +332,7 @@ class _ResultState extends State<Result> {
       File file = File(filePath);
       await file.writeAsString(formData);
       Utils.toastMessage('File saved successfully');
+      Navigator.pop(context);
     }catch(e){
       Utils.toastMessage(e.toString());
     }
